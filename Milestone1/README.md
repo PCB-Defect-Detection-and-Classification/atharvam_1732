@@ -141,6 +141,38 @@ python main.py
 
 ---
 
+---
+
+## 📊 Visual Assets Report Results
+
+### Output 1: Visual Verification (Module 1)
+
+Below are sample visual outputs from the detection pipeline.  
+These demonstrate:  
+- the original golden template  
+- the test image  
+- the difference map  
+- the binary mask  
+- and the final detected defect region  
+
+#### 🔍 Example: Missing Hole Defect
+
+| Template | Test Image |
+|---------|------------|
+| ![](img/Missing_hole_Demonstration_1_Template.jpg) | ![](img/Missing_hole_Demonstration_2_Test.jpg) |
+
+| Diff Map | Binary Mask | Detection |
+|----------|-------------|-----------|
+| ![](img/Missing_hole_Demonstration_3_Diff_Map.jpg) | ![](img/Missing_hole_Demonstration_4_Binary_Mask.jpg) | ![](img/Missing_hole_Demonstration_5_Detection.jpg) |
+
+---
+
+### Output 2: Labeled Dataset (Module 2)
+
+The system processed 693 image pairs and generated a clean dataset ready for CNN training.
+
+
+
 ## 🔜 Next Steps (Milestone 2)
 
 * **Data Augmentation:** Increase dataset size via rotations and flips.
