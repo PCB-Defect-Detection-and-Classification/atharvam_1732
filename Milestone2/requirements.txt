@@ -1,6 +1,6 @@
-tensorflow>=2.10.0
+tensorflow
 numpy
 matplotlib
 seaborn
 scikit-learn
-opencv-python-headless
+opencv-python

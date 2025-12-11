@@ -1,56 +1,61 @@
-import tensorflow as tf
+import os
 import numpy as np
+import tensorflow as tf
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import classification_report, confusion_matrix
-import os
 
-# CONFIG
-MODEL_PATH = '../output/pcb_defect_model.keras'
-DATA_DIR = '../dataset/Labeled_Training_Data'
-OUTPUT_DIR = '../output'
+# --- CONFIGURATION ---
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, '../dataset/PCB_DATASET/images')
+MODEL_PATH = os.path.join(BASE_DIR, 'output/pcb_defect_model.keras')
+CM_PATH = os.path.join(BASE_DIR, 'output/confusion_matrix.png')
+IMG_SIZE = (128, 128)
+BATCH_SIZE = 32
 
-def evaluate_performance():
-    if not os.path.exists(MODEL_PATH):
-        print(f"Error: Model not found at {MODEL_PATH}")
-        return
-
-    print("Loading Model and Validation Data...")
-    model = tf.keras.models.load_model(MODEL_PATH)
+def evaluate():
+    print("Starting Evaluation...")
     
-    # Shuffle=True ensures we see all classes in the validation set
+    # 1. Load Validation Data
     val_ds = tf.keras.utils.image_dataset_from_directory(
         DATA_DIR, validation_split=0.2, subset="validation", seed=123,
-        image_size=(128, 128), batch_size=32, shuffle=True
+        image_size=IMG_SIZE, batch_size=BATCH_SIZE, shuffle=False
     )
     class_names = val_ds.class_names
 
-    y_true, y_pred = [], []
-    print("Generating Predictions...")
-    for img, label in val_ds:
-        pred = model.predict(img, verbose=0)
-        y_true.extend(label.numpy())
-        y_pred.extend(np.argmax(pred, axis=1))
-
-    # Metrics
-    report = classification_report(y_true, y_pred, target_names=class_names)
-    print("\nClassification Report:\n")
-    print(report)
+    # 2. Load Model
+    if not os.path.exists(MODEL_PATH):
+        print("Model not found. Run training first.")
+        return
     
-    # Save Report
-    with open(os.path.join(OUTPUT_DIR, 'evaluation_report.txt'), 'w') as f:
-        f.write(report)
+    model = tf.keras.models.load_model(MODEL_PATH)
+    
+    # 3. Predict
+    y_true = []
+    y_pred = []
+    
+    print("   Running predictions...")
+    for images, labels in val_ds:
+        preds = model.predict(images, verbose=0)
+        y_true.extend(labels.numpy())
+        y_pred.extend(np.argmax(preds, axis=1))
 
-    # Confusion Matrix
+    # 4. Metrics
+    print("\n" + "="*50)
+    print("   CLASSIFICATION REPORT")
+    print("="*50)
+    print(classification_report(y_true, y_pred, target_names=class_names))
+    
+    # 5. Confusion Matrix
     cm = confusion_matrix(y_true, y_pred)
-    plt.figure(figsize=(10,8))
-    sns.heatmap(cm, annot=True, fmt='d', xticklabels=class_names, yticklabels=class_names, cmap='Blues')
-    plt.title("Confusion Matrix")
-    plt.ylabel('True Label')
-    plt.xlabel('Predicted Label')
-    plt.tight_layout()
-    plt.savefig(os.path.join(OUTPUT_DIR, 'confusion_matrix.png'))
-    print(f"Evaluation Complete. Results saved to {OUTPUT_DIR}")
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Greens', 
+                xticklabels=class_names, yticklabels=class_names)
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.title('Confusion Matrix (EfficientNetB0 Optimized)')
+    plt.savefig(CM_PATH)
+    print(f"Confusion Matrix saved to {CM_PATH}")
 
 if __name__ == "__main__":
-    evaluate_performance()
+    evaluate()
