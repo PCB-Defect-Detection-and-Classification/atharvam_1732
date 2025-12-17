@@ -7,7 +7,7 @@ SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SRC_DIR)
 
 # 3. Define the Model Path
-# Structure: Milestone 3/models/pcb_defect_model.keras
+# Structure: Milestone 3/models/pcb_defect_model_optimized.keras
 MODEL_PATH = os.path.join(PROJECT_ROOT, 'models', 'pcb_defect_model.keras')
 
 # 4. Global Configuration

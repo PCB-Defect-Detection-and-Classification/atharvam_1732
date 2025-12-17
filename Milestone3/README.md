@@ -20,20 +20,28 @@ The system allows Quality Assurance (QA) engineers to upload PCB images, automat
 ```text
 Milestone 3/
 │
-├── app.py                    # Main Frontend Application (Streamlit)
+├── app.py                    # 🖥️ Main Frontend Application (Streamlit)
 │
-├── src/                      # Backend Logic
+├── src/                      # ⚙️ Backend Logic
 │   ├── backend.py            # Image Alignment, Subtraction & Inference Pipeline
 │   ├── config.py             # Global Configuration & Paths
 │
-├── models/                   # Trained AI Models
-│   └── pcb_defect_model.keras  # The 97.8% Accuracy Model
+├── models/                   # 🧠 Trained AI Models
+│   └── pcb_defect_model_optimized.keras  # The 97.8% Accuracy Model
+│
+├── img/                      # 📸 Application Screenshots
+│   ├── dashboard_before_uploads.png
+│   ├── dashboard_after_uploads.png
+│   ├── defect_map.png
+│   ├── x-ray_comparison.png
+│   └── data_table.png
 │
 ├── requirements.txt          # Project Dependencies
 └── README.md                 # Documentation
-````
 
------
+```
+
+---
 
 ## 💻 Module 5: Web UI (Frontend)
 
@@ -41,12 +49,12 @@ We built a responsive dashboard using **Streamlit** that serves as the control c
 
 ### ✨ Key Features
 
-  * **Interactive Sidebar:** Allows users to adjust the **Confidence Threshold** in real-time to filter weak predictions.
-  * **Dual-Image Upload:** Accepts both a "Golden Template" and a "Test Board" for comparative analysis.
-  * **"X-Ray" Vision Mode:** A custom component (`streamlit-image-comparison`) that allows users to slide between the reference and test images to manually verify defects.
-  * **Automated Reporting:** Generates and downloads a **PDF Inspection Certificate** containing visual proofs and defect logs.
+* **Interactive Sidebar:** Allows users to adjust the **Confidence Threshold** in real-time to filter weak predictions.
+* **Dual-Image Upload:** Accepts both a "Golden Template" and a "Test Board" for comparative analysis.
+* **"X-Ray" Vision Mode:** A custom component (`streamlit-image-comparison`) that allows users to slide between the reference and test images to manually verify defects.
+* **Automated Reporting:** Generates and downloads a **PDF Inspection Certificate** containing visual proofs and defect logs.
 
------
+---
 
 ## ⚙️ Module 6: Backend Pipeline
 
@@ -56,48 +64,51 @@ The backend (`src/backend.py`) orchestrates the complex logic required to go fro
 
 To resolve common misclassifications (e.g., *Short* vs. *Open Circuit*), we implemented a novel two-step processing strategy:
 
-1.  **Visualization Box (Tight Crop):**
+1. **Visualization Box (Tight Crop):**
+* **Purpose:** User Interface.
+* **Logic:** Tightly hugs the defect (padding +5px) to show the user exactly where the error is.
+* **Result:** Clean, precise red bounding boxes on the screen.
 
-      * **Purpose:** User Interface.
-      * **Logic:** Tightly hugs the defect (padding +5px) to show the user exactly where the error is.
-      * **Result:** Clean, precise red bounding boxes on the screen.
 
-2.  **Context Box (Fixed Context):**
+2. **Context Box (Fixed Context):**
+* **Purpose:** AI Prediction.
+* **Logic:** Extracts a fixed 64x64 region (or larger) around the defect.
+* **Result:** Provides the Neural Network with enough "surrounding visual context" to distinguish a broken track (*Open*) from a bridged track (*Short*).
 
-      * **Purpose:** AI Prediction.
-      * **Logic:** Extracts a fixed 64x64 region (or larger) around the defect.
-      * **Result:** Provides the Neural Network with enough "surrounding visual context" to distinguish a broken track (*Open*) from a bridged track (*Short*).
 
-### 🛠️ Pipeline Steps
 
-1.  **Image Loading:** Reads uploaded files into NumPy arrays.
-2.  **Smart Alignment:** Uses **ORB Feature Matching** (2000 features) to perfectly align the Test Board with the Template, correcting for rotation and shift.
-3.  **Difference Extraction:** Applies Gaussian Blur (3x3) and Adaptive Thresholding to find anomalies.
-4.  **ROI Extraction:** Crops suspected regions using the "Context Box" strategy.
-5.  **Classification:** Passes crops to the **EfficientNetB0** model to predict the defect type.
-6.  **Report Generation:** Compiles all data into a structured PDF.
-
------
+---
 
 ## 🖼️ Application Showcase
 
-### 1\. The Dashboard
+### 1. The Dashboard (Initial State)
 
 *A clean interface for uploading boards and configuring inspection parameters.*
+![](img/dashboard_before_uploads.png)
 
-### 2\. Defect Detection Map
+### 2. Active Inspection
 
-*Red bounding boxes automatically highlight all detected errors.*
+*Real-time feedback after uploading template and test images. The system calculates a Health Score instantly.*
+![](img/dashboard_after_uploads.png)
 
-### 3\. "X-Ray" Comparison Tool
+### 3. Defect Detection Map
+
+*Red bounding boxes automatically highlight all detected errors using the "Tight Crop" strategy.*
+![](img/defect_map.png)
+
+### 4. "X-Ray" Comparison Tool
 
 *An interactive slider reveals the differences between the Reference and Test boards.*
+![](img/x-ray_comparison.png)
 
-### 4\. PDF Inspection Report
+### 5. Detailed Defect Log
 
-*An auto-generated document listing Board Health Score, Defect Counts, and providing Visual Proofs.*
+*A structured data table listing all detected defects with confidence scores and coordinates.*
+![](img/data_table.png)
 
------
+📥 **[Download Official PCB Inspection Report (PDF)](PCB_Inspection_Report.pdf)**
+
+---
 
 ## 🚀 How to Run the App
 
@@ -109,25 +120,26 @@ Ensure you have the trained model from Milestone 2 placed in the `models/` direc
 
 ```bash
 pip install -r requirements.txt
+
 ```
 
 ### 3️⃣ Launch the Application
 
 ```bash
 streamlit run app.py
+
 ```
 
 The application will open in your browser at `http://localhost:8501`.
 
------
+---
 
 ## ✅ Final Project Status
 
 | Milestone | Objective | Status | Result |
-| :--- | :--- | :--- | :--- |
+| --- | --- | --- | --- |
 | **M1** | Defect Detection | ✅ Complete | **100% Recall** (0 Missed Defects) |
 | **M2** | Defect Classification | ✅ Complete | **97.80% Accuracy** (EfficientNetB0) |
 | **M3** | System Integration | ✅ Complete | **Fully Functional Web App** |
 
------
-
+---
