@@ -3,6 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.14-orange?logo=tensorflow)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)
+![SQLite](https://img.shields.io/badge/Database-SQLite3-green?logo=sqlite)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
 > **Internship Capstone Project** | **Final Accuracy:** 97.80% | **Recall:** 100% on Critical Defects
@@ -10,9 +11,9 @@
 ---
 
 ## 📖 Executive Summary
-This project is an automated optical inspection (AOI) system designed to identify and classify manufacturing defects in Printed Circuit Boards (PCBs). By integrating **Computer Vision (OpenCV)** for precise defect localization and **Deep Learning (EfficientNetB0)** for accurate classification, the system eliminates manual inspection errors.
+This project is an **Industrial-Grade Automated Optical Inspection (AOI)** system designed to identify, classify, and analyze manufacturing defects in Printed Circuit Boards (PCBs).
 
-The final product is a production-ready **Web Application** that allows Quality Assurance engineers to upload PCB images, visualize defects in real-time, and generate industry-standard PDF inspection reports.
+Going beyond simple detection, the system serves as a complete **Quality Assurance Platform**. It integrates **Computer Vision** for precision alignment, **Deep Learning** for classification, and **Business Intelligence** logic to calculate repair costs, determine scrap status, and track production yield over time via a persistent database.
 
 ---
 
@@ -23,6 +24,7 @@ The final product is a production-ready **Web Application** that allows Quality 
 | **Frontend** | Streamlit | Interactive Dashboard & Reporting UI |
 | **Backend** | OpenCV, Python | Image Alignment (ORB) & Defect Extraction |
 | **AI Model** | TensorFlow, Keras | Defect Classification (EfficientNetB0) |
+| **Database** | SQLite3 | Persistent Audit Logs & Analytics |
 | **Reporting** | FPDF, Pandas | Auto-generating PDF Certificates & CSV Logs |
 
 ---
@@ -48,9 +50,33 @@ This repository is organized into 4 distinct developmental phases:
 * **Result:** Eliminated false positives between "Shorts" and "Open Circuits."
 
 ### 🔴 **[Milestone 4: Final Product & Deployment](./Milestone4)**
-* **Focus:** User Experience & Documentation.
-* **Key Achievement:** Finalized the Web App with **"X-Ray" Comparison**, **PDF Reporting**, and **CSV Export** features.
-* **Result:** A fully functional, deployed application.
+* **Focus:** Industrial Features & User Experience.
+* **Key Achievement:** Finalized the QA Platform with **Database Analytics**, **Batch Processing**, **Smart Costing**, and **Automated PDF Reporting**.
+* **Result:** A fully functional, deployed application ready for factory use.
+
+---
+
+## ✨ Advanced Capabilities (Final System Features - Beyond Requirements)
+
+While the initial requirements focused on simple detection, the final system (Milestone 4) implements a full industrial workflow:
+
+### 1. 🧠 Smart Alignment & Preprocessing
+   - **Auto-Registration:** Uses **ORB Feature Matching & Homography** to automatically align, rotate, and warp the Test Board to match the Golden Template perfectly.
+   - **Noise Filtering:** Morphological operations remove dust and lighting glare to prevent false positives.
+
+### 2. 💰 Business Intelligence & BER Logic
+   - **Smart Costing:** Automatically calculates estimated repair costs (e.g., *Mouse Bite = $11.25*) and repair time.
+   - **Scrap Decision Engine:** Flags boards as **"SCRAP"** if repair costs exceed 75% of value or if critical defects (e.g., Missing Hole) are found.
+
+### 3. 🏭 Automated Batch Processing
+   - **Bulk Inspection:** Supports **ZIP file uploads** to process dozens of boards simultaneously.
+   - **Lazy Loading:** "Deep Dive" mode allows technicians to visually inspect specific files from a large batch without re-uploading.
+
+### 4. 🗄️ Enterprise "Memory" (Analytics)
+   - **Persistent Database:** An integrated **SQLite** database stores every inspection log forever.
+   - **Health Trend Analysis:** A dynamic line chart tracks the **Average Health Score** over the last 20 boards, helping identify drifting production quality.
+   - **Yield & Cost Metrics:** Visualizes **Pass/Fail Rates**, **Financial Loss**, and **Defect Pareto Charts** in real-time.
+   - **Audit Tools:** Includes filtering by date/status and database management tools.
 
 ---
 
@@ -94,10 +120,9 @@ To run the complete system (Milestone 4 version):
 
 ## 📚 Documentation
 For detailed technical breakdowns, please refer to the specific documentation in Milestone 4:
-* [📖 User Guide](./Milestone4/Documentation/User_Guide.md) - How to use the software.
-* [🛠️ Technical Report](./Milestone4/Documentation/Technical_Report.md) - Deep dive into algorithms and architecture.
+* [📖 User Guide](./Milestone4/Documentation/User_Guide.md) - Manual for Operators and Managers.
+* [🛠️ Technical Report](./Milestone4/Documentation/Technical_Report.md) - Deep dive into algorithms, architecture, and business logic.
 
 ---
 
-**Author:** Atharva Mundke |
-**Date:** December 2025
+**Author:** Atharva Mundke | **Date:** December 2025
