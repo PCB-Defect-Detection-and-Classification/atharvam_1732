@@ -1,0 +1,4 @@
+,type,confidence,bbox,cost,time,action
+0,Spur,97.59665,"[1752, 1356, 1805, 1388]",0.75,1,Scrape excess copper
+1,Spur,97.9423,"[387, 1302, 458, 1326]",0.75,1,Scrape excess copper
+2,Spur,91.585045,"[723, 829, 783, 862]",0.75,1,Scrape excess copper
