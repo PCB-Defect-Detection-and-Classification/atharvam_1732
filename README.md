@@ -6,7 +6,15 @@
 ![SQLite](https://img.shields.io/badge/Database-SQLite3-green?logo=sqlite)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-> **Internship Capstone Project** | **Final Accuracy:** 97.80% | **Recall:** 100% on Critical Defects
+> **Internship Capstone Project** | **Final Accuracy:** 97.80% | **Recall:** 100% on Critical Defects 
+
+## 📽️ Project Presentation
+<div align="center">
+
+[![View Presentation](https://img.shields.io/badge/View-Presentation-0969da?style=for-the-badge)](https://pcb-defect-detection-and-classification.github.io/atharvam_1732/)
+
+</div>
+
 
 ---
 
