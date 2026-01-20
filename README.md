@@ -109,7 +109,7 @@ To run the complete system (Milestone 4 version):
 
 1.  **Clone the Repository**
     ```bash
-    git clone [https://github.com/your-username/PCB-Defect-Detection.git](https://github.com/your-username/PCB-Defect-Detection.git)
+    git clone https://github.com/PCB-Defect-Detection-and-Classification/atharvam_1732.git
     cd PCB-Defect-Detection
     ```
 
