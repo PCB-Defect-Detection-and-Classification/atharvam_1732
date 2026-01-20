@@ -6,7 +6,7 @@
 ![SQLite](https://img.shields.io/badge/Database-SQLite3-green?logo=sqlite)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
-> **Internship Capstone Project** | **Final Accuracy:** 97.80% | **Recall:** 100% on Critical Defects 
+> **Internship Project** | **Final Accuracy:** 97.80% | **Recall:** 100% on Critical Defects 
 
 ## 📽️ Project Presentation
 <div align="center">
